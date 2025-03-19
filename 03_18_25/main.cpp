@@ -1,8 +1,10 @@
 #include "donut.h"
+#include <iostream>
 
 int main()
 {
-    Donut::icingType ice = Donut::MAPLE;
+    Donut myDonut("Chocolate", "M&Ms", "Raspberry");
+    std::cout << myDonut << std::endl;
 
     return 0;
 }
