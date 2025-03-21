@@ -1,1 +1,8 @@
 *Zone.Identifier
+build/
+03_20_25/unit test/CMakeFiles
+03_20_25/unit test/cmake_install.cmake
+03_20_25/unit test/CMakeCache.txt
+03_20_25/unit test/libstudent.so
+03_20_25/unit test/runTests
+
