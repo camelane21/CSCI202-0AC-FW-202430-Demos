@@ -22,6 +22,23 @@ TEST(donutTest, icingSetterTest)
     EXPECT_EQ(d.getIcing(), Donut::MAPLE);
 }
 
+TEST(donutTest, toppingSetterTest)
+ {
+     Donut d("Chocolate", "Peanuts", "Peanut Butter");
+     EXPECT_ANY_THROW(d.setTopping("Vanilla"));
+     EXPECT_NO_THROW(d.setTopping("OrEo"));
+     EXPECT_EQ(d.getTopping(), Donut::OREO);
+ }
+ 
+ TEST(donutTest, drizzleSetterTest)
+ {
+     Donut d("Chocolate", "Peanuts", "Peanut Butter");
+     EXPECT_ANY_THROW(d.setDrizzle("Bacon"));
+     EXPECT_NO_THROW(d.setDrizzle("CaRamel"));
+     EXPECT_EQ(d.getDrizzle(), Donut::CARAMEL);
+ }
+ 
+
 extern "C" int startTest(int x, char **y)
 {
     testing::InitGoogleTest(&x, y);
