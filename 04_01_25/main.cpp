@@ -1,6 +1,7 @@
 #include <iostream>
 #include <limits>
 #include <cmath>
+#include <string>
 #include "linkedStack.h"
 #include "drink.h"
 #include "arrayStack.h"
@@ -15,43 +16,47 @@ bool numInRange(int num, int lower, int upper);
 bool numGT0(int num, int = 0, int = 0);
 bool negNum(int num, int = 0, int = 0);
 int inputInt(std::string prompt, bool (*func)(int, int, int), int lower = 0, int upper = 0);
-long getBinaryNumber();
-
-// lecture activity change binary number conversion code to use strings
-// subtract '0' from each character in the string to convert it to it's number form.
-// note you will only need 1 stack for this method.
 
 int main()
 {
-    /* drink d(inputDrinkBase(), inputDrinkTemperature(), inputDrinkSize(), inputDrinkDairy(), inputDrinkFlavor()); */
+    std::string binStr;
+    std::cout << "Enter a binary number: ";
+    std::cin >> binStr;
 
-    long binNumber = getBinaryNumber();
-    long copyNum = binNumber;
-    linkedStack<int> binary;
-    arrayStack<int> binReverse;
-    while (copyNum > 0)
+    // Validate input: only 0s and 1s allowed
+    for (char ch : binStr)
     {
-        int digit = copyNum % 10;
-        if (digit != 0 && digit != 1)
+        if (ch != '0' && ch != '1')
         {
-            std::cout << "Binary Numbers only have 1s and 0s." << std::endl;
-            break;
+            std::cout << "Binary numbers must only contain 0s and 1s." << std::endl;
+            return 1;
         }
-        binary.push(digit);
-        copyNum = copyNum / 10;
     }
+
+    // Use a stack to store binary digits
+    linkedStack<int> binary;
+    for (char ch : binStr)
+    {
+        binary.push(ch - '0'); // Convert char to int by subtracting '0'
+    }
+
+    // Reverse the stack to match right-to-left processing for binary
+    linkedStack<int> reverse;
     while (!binary.isEmptyStack())
     {
-        binReverse.push(binary.pop());
+        reverse.push(binary.pop());
     }
-    int position = 0;
+
+    // Convert binary to decimal
     int decimal = 0;
-    while (!binReverse.isEmptyStack())
+    int position = 0;
+    while (!reverse.isEmptyStack())
     {
-        decimal += binReverse.pop() * pow(2, position);
+        decimal += reverse.pop() * static_cast<int>(pow(2, position));
         position++;
     }
-    std::cout << binNumber << " is " << decimal << " in decimal." << std::endl;
+
+    std::cout << binStr << " is " << decimal << " in decimal." << std::endl;
 
     return 0;
 }
@@ -140,7 +145,6 @@ bool numInRange(int num, int lower, int upper)
 
 bool numGT0(int num, int, int)
 {
-
     return num > 0;
 }
 
@@ -168,19 +172,4 @@ int inputInt(std::string prompt, bool (*func)(int, int, int), int lower, int upp
     }
 
     return theNum;
-}
-
-long getBinaryNumber()
-{
-    long x;
-    std::cout << "Enter a number in binary: ";
-    std::cin >> x;
-    while (!std::cin || x < 0)
-    {
-        if (!std::cin)
-            resetStream();
-        std::cout << "Enter a number in binary: ";
-        std::cin >> x;
-    }
-    return x;
 }
