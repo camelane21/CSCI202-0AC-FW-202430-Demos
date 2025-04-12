@@ -143,4 +143,27 @@ void moveDisks(int count, char source, char destination, char spare)
         std::cout << "Move disk " << count << " from " << source << " to " << destination << std::endl;
         moveDisks(count - 1, spare, destination, source);
     }
+    long iterativeFibonacci(int n, long first, long second) {
+    if (n == 1)
+        return first;
+    else if (n == 2)
+        return second;
+
+    long previous1 = first;
+    long previous2 = second;
+    long current = 0;
+
+    for (int i = 3; i <= n; ++i) {
+        current = previous1 + previous2;
+        previous1 = previous2;
+        previous2 = current;
+    }
+
+    return current;
 }
+//  I would choose the iterative version for this task because it’s simpler and more efficient in terms of memory and avoids the overhead of recursive calls.
+
+} 
+
+
+
