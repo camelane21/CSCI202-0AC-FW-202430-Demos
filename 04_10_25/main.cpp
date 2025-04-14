@@ -8,6 +8,9 @@
 #include "searchSort.h"
 #include "person.h"
 // lecture activity Pick which sort you would rather implement in a program.
+// I would rather implement merge sort because it guarantees O(n log n) performance, 
+// works efficiently on large data sets, and is especially well-suited for linked lists 
+// due to its recursive, divide-and-conquer nature.
 
 int compareByName(Person *&, Person *&);
 int compareByAge(Person *&, Person *&);
