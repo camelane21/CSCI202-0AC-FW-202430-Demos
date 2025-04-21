@@ -8,9 +8,6 @@
 int compareNumbers(const int &first, const int &second);
 int compareByName(const Person &p1, const Person &p2);
 
-// get the people from the array into the AVL tree.
-
-// print the inorder traversal
 
 int main()
 {
@@ -80,6 +77,16 @@ int main()
     people[9] = new Person("Bernard McElroy", 60, 183);
 
     AVLTree<Person> peopleTree(compareByName);
+
+     // get the people from the array into the AVL tree.
+    // print the inorder traversal
+     for (int i = 0; i < 10; i++)
+    {
+        peopleTree.insert(*people[i]);
+    }
+
+    std::cout << "Inorder Traversal of peopleTree:\n";
+    std::cout << peopleTree.inorderTraversal() << std::endl;
 
     for (int i = 0; i < 10; i++)
     {
